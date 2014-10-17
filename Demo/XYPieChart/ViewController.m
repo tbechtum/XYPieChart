@@ -34,7 +34,7 @@
     [super viewDidLoad];
     self.slices = [NSMutableArray arrayWithCapacity:10];
     
-    for(int i = 0; i < 5; i ++)
+    for(NSUInteger i = 0; i < 5; i ++)
     {
         NSNumber *one = [NSNumber numberWithInt:rand()%60+20];
         [_slices addObject:one];
@@ -176,7 +176,7 @@
 
 - (IBAction)updateSlices
 {
-    for(int i = 0; i < _slices.count; i ++)
+    for(NSUInteger i = 0; i < _slices.count; i ++)
     {
         [_slices replaceObjectAtIndex:i withObject:[NSNumber numberWithInt:rand()%60+20]];
     }

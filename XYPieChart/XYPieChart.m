@@ -238,8 +238,13 @@ static CGPathRef CGPathCreateArc(CGPoint center, CGFloat radius, CGFloat startAn
             label = [NSString stringWithFormat:@"%0.0f", layer.percentage*100];
         else
             label = (layer.text)?layer.text:[NSString stringWithFormat:@"%0.0f", layer.value];
-        CGSize size = [label sizeWithFont:self.labelFont];
         
+#ifdef __IPHONE_7_0
+        CGSize size = [label sizeWithAttributes: @{NSFontAttributeName:self.labelFont}];
+#else
+        CGSize size = [label sizeWithFont:self.labelFont];
+#endif
+
         if(M_PI*2*_labelRadius*layer.percentage < MAX(size.width,size.height))
         {
             [textLayer setString:@""];
@@ -640,7 +645,11 @@ static CGPathRef CGPathCreateArc(CGPoint center, CGFloat radius, CGFloat startAn
         [textLayer setShadowOpacity:1.0f];
         [textLayer setShadowRadius:2.0f];
     }
+#ifdef __IPHONE_7_0
+    CGSize size = [@"0" sizeWithAttributes: @{NSFontAttributeName:self.labelFont}];
+#else
     CGSize size = [@"0" sizeWithFont:self.labelFont];
+#endif
     [CATransaction setDisableActions:YES];
     [textLayer setFrame:CGRectMake(0, 0, size.width, size.height)];
     [textLayer setPosition:CGPointMake(_pieCenter.x + (_labelRadius * cos(0)), _pieCenter.y + (_labelRadius * sin(0)))];
@@ -660,7 +669,11 @@ static CGPathRef CGPathCreateArc(CGPoint center, CGFloat radius, CGFloat startAn
     else
         label = (pieLayer.text)?pieLayer.text:[NSString stringWithFormat:@"%0.0f", value];
     
+#ifdef __IPHONE_7_0
+    CGSize size = [label sizeWithAttributes: @{NSFontAttributeName:self.labelFont}];
+#else
     CGSize size = [label sizeWithFont:self.labelFont];
+#endif
     
     [CATransaction setDisableActions:YES];
     if(M_PI*2*_labelRadius*pieLayer.percentage < MAX(size.width,size.height) || value <= 0)
