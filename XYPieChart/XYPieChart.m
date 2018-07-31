@@ -552,7 +552,7 @@ static CGPathRef CGPathCreateArc(CGPoint center, CGFloat radius, CGFloat startAn
             if ([_delegate respondsToSelector:@selector(pieChart:willDeselectSliceAtIndex:)])
                 [_delegate pieChart:self willDeselectSliceAtIndex:tempPre];
             [self setSliceDeselectedAtIndex:tempPre];
-            previousSelection = newSelection;
+            // previousSelection = newSelection;
             if([_delegate respondsToSelector:@selector(pieChart:didDeselectSliceAtIndex:)])
                 [_delegate pieChart:self didDeselectSliceAtIndex:tempPre];
         }
@@ -574,12 +574,12 @@ static CGPathRef CGPathCreateArc(CGPoint center, CGFloat radius, CGFloat startAn
                 [self setSliceDeselectedAtIndex:newSelection];
                 if (newSelection != -1 && [_delegate respondsToSelector:@selector(pieChart:didDeselectSliceAtIndex:)])
                     [_delegate pieChart:self didDeselectSliceAtIndex:newSelection];
-                previousSelection = _selectedSliceIndex = -1;
+                _selectedSliceIndex = -1; // previousSelection =
             }else{
                 if ([_delegate respondsToSelector:@selector(pieChart:willSelectSliceAtIndex:)])
                     [_delegate pieChart:self willSelectSliceAtIndex:newSelection];
                 [self setSliceSelectedAtIndex:newSelection];
-                previousSelection = _selectedSliceIndex = newSelection;
+                _selectedSliceIndex = newSelection; // previousSelection =
                 if (newSelection != -1 && [_delegate respondsToSelector:@selector(pieChart:didSelectSliceAtIndex:)])
                     [_delegate pieChart:self didSelectSliceAtIndex:newSelection];
             }
