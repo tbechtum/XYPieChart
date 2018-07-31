@@ -70,7 +70,7 @@
     self.downArrow.transform = CGAffineTransformMakeRotation(M_PI);
 }
 
-- (void)viewDidUnload
+- (void)dealloc
 {
     [self setPieChartLeft:nil];
     [self setPieChartRight:nil];
@@ -79,7 +79,6 @@
     [self setIndexOfSlices:nil];
     [self setNumOfSlices:nil];
     [self setDownArrow:nil];
-    [super viewDidUnload];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -102,12 +101,6 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
 	[super viewDidDisappear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 
 - (IBAction)SliceNumChanged:(id)sender 

@@ -443,7 +443,7 @@ static CGPathRef CGPathCreateArc(CGPoint center, CGFloat radius, CGFloat startAn
         NSNumber *presentationLayerEndAngle = [[obj presentationLayer] valueForKey:@"endAngle"];
         CGFloat interpolatedEndAngle = [presentationLayerEndAngle doubleValue];
 
-        CGPathRef path = CGPathCreateArc(_pieCenter, _pieRadius, interpolatedStartAngle, interpolatedEndAngle);
+        CGPathRef path = CGPathCreateArc(self->_pieCenter, self->_pieRadius, interpolatedStartAngle, interpolatedEndAngle);
         [obj setPath:path];
         CFRelease(path);
         
@@ -451,7 +451,7 @@ static CGPathRef CGPathCreateArc(CGPoint center, CGFloat radius, CGFloat startAn
             CALayer *labelLayer = [[obj sublayers] objectAtIndex:0];
             CGFloat interpolatedMidAngle = (interpolatedEndAngle + interpolatedStartAngle) / 2;        
             [CATransaction setDisableActions:YES];
-            [labelLayer setPosition:CGPointMake(_pieCenter.x + (_labelRadius * cos(interpolatedMidAngle)), _pieCenter.y + (_labelRadius * sin(interpolatedMidAngle)))];
+            [labelLayer setPosition:CGPointMake(self->_pieCenter.x + (self->_labelRadius * cos(interpolatedMidAngle)), self->_pieCenter.y + (self->_labelRadius * sin(interpolatedMidAngle)))];
             [CATransaction setDisableActions:NO];
         }
     }];
@@ -497,7 +497,7 @@ static CGPathRef CGPathCreateArc(CGPoint center, CGFloat radius, CGFloat startAn
         CGPathRef path = [pieLayer path];
         
         if (CGPathContainsPoint(path, &transform, point, 0)) {
-            [pieLayer setLineWidth:_selectedSliceStroke];
+            [pieLayer setLineWidth:self->_selectedSliceStroke];
             [pieLayer setStrokeColor:[UIColor whiteColor].CGColor];
             [pieLayer setLineJoin:kCALineJoinBevel];
             [pieLayer setZPosition:MAXFLOAT];
