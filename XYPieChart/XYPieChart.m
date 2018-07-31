@@ -74,7 +74,7 @@
 {
     CABasicAnimation *arcAnimation = [CABasicAnimation animationWithKeyPath:key];
     NSNumber *currentAngle = [[self presentationLayer] valueForKey:key];
-    if(!currentAngle) currentAngle = from;
+    if (currentAngle == nil) currentAngle = from; // if(!currentAngle) currentAngle = from;
     [arcAnimation setFromValue:currentAngle];
     [arcAnimation setToValue:to];         
     [arcAnimation setDelegate:delegate];
@@ -574,12 +574,12 @@ static CGPathRef CGPathCreateArc(CGPoint center, CGFloat radius, CGFloat startAn
                 [self setSliceDeselectedAtIndex:newSelection];
                 if (newSelection != -1 && [_delegate respondsToSelector:@selector(pieChart:didDeselectSliceAtIndex:)])
                     [_delegate pieChart:self didDeselectSliceAtIndex:newSelection];
-                _selectedSliceIndex = -1; // previousSelection =
+                _selectedSliceIndex = -1;
             }else{
                 if ([_delegate respondsToSelector:@selector(pieChart:willSelectSliceAtIndex:)])
                     [_delegate pieChart:self willSelectSliceAtIndex:newSelection];
                 [self setSliceSelectedAtIndex:newSelection];
-                _selectedSliceIndex = newSelection; // previousSelection =
+                _selectedSliceIndex = newSelection;
                 if (newSelection != -1 && [_delegate respondsToSelector:@selector(pieChart:didSelectSliceAtIndex:)])
                     [_delegate pieChart:self didSelectSliceAtIndex:newSelection];
             }
